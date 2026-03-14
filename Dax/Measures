@@ -1,0 +1,109 @@
+# DAX Measures Reference
+
+All measures are stored in the `_Measures` table in the Power BI semantic model.
+
+---
+
+## Total Sales
+```dax
+Total Sales = SUM(gold_daily_sales[sales])
+```
+**Purpose:** Base measure. Sums all sales in the current filter context.
+All time intelligence measures depend on this.
+
+---
+
+## Sales LY
+```dax
+Sales LY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(DateTable[Date]))
+```
+**Purpose:** Total Sales shifted back exactly one year.
+Requires DateTable marked as date table with active relationship to gold_daily_sales.
+
+---
+
+## YoY Growth %
+```dax
+YoY Growth % = DIVIDE([Total Sales] - [Sales LY], [Sales LY])
+```
+**Purpose:** Year-over-year growth rate as a percentage.
+DIVIDE used instead of / to handle blank denominator gracefully for 2013 dates.
+
+---
+
+## Avg Daily Sales
+```dax
+Avg Daily Sales = AVERAGEX(VALUES(DateTable[Date]), [Total Sales])
+```
+**Purpose:** Average daily sales total across the current filter period.
+AVERAGEX iterates at the day level to avoid averaging at store/product grain.
+
+---
+
+## Sales on Promo
+```dax
+Sales on Promo = CALCULATE([Total Sales], gold_daily_sales[onpromotion] = 1)
+```
+**Purpose:** Total Sales filtered to promotion days only.
+Uses = 1 instead of = TRUE because onpromotion is stored as BIT type from Fabric.
+
+---
+
+## Promo Uplift %
+```dax
+Promo Uplift % = DIVIDE([Sales on Promo], [Total Sales] - [Sales on Promo]) - 1
+```
+**Purpose:** Ratio of promotion sales vs non-promotion sales.
+Positive value means promotions are driving incremental sales above baseline.
+
+---
+
+## Holiday Sales
+```dax
+Holiday Sales = CALCULATE([Total Sales], gold_daily_sales[is_holiday] = 1)
+```
+**Purpose:** Total Sales on national holiday dates only.
+is_holiday flag built in Silver layer and carried through gold_daily_sales view.
+
+---
+
+## High Risk Stores
+```dax
+High Risk Stores = 
+COUNTROWS(
+    FILTER(
+        gold_inventory_risk, 
+        gold_inventory_risk[reorder_risk_level] = "HIGH RISK"
+    )
+)
+```
+**Purpose:** Count of store and product family combinations at HIGH RISK
+reorder level. Driven by weekly demand forecast threshold in gold_inventory_risk view.
+
+---
+
+## Weeks of Supply
+```dax
+Weeks of Supply = DIVIDE(SUM(gold_daily_sales[sales]), [Avg Daily Sales] * 7)
+```
+**Purpose:** Weeks of demand represented by current sales volume.
+Note: uses sales as proxy for on-hand stock. In production this would use
+actual stock figures from ERP system.
+
+---
+
+## Rolling 7D Sales
+```dax
+Rolling 7D Sales = 
+CALCULATE(
+    [Total Sales], 
+    DATESINPERIOD(
+        DateTable[Date], 
+        LASTDATE(DateTable[Date]), 
+        -7, 
+        DAY
+    )
+)
+```
+**Purpose:** Total Sales for the 7-day window ending on the last visible date.
+Used as a smoothed trend line in time series visuals to reduce daily noise.
