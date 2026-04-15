@@ -1,7 +1,6 @@
 # DAX Measures Reference
 
 All measures are stored in the `_Measures` table in the Power BI semantic model.
-
 ---
 
 ## Total Sales
