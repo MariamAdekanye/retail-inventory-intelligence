@@ -2,8 +2,8 @@
 
 An end-to-end retail analytics platform built with Microsoft Fabric, 
 Power BI, SQL, Python, and Power Automate. The project tackles a 
-real-world supply chain problem — inventory blindspots that cause 
-stockouts and overstock — by building a full data pipeline from raw 
+real-world supply chain problem; inventory blindspots that cause 
+stockouts and overstock by building a full data pipeline from raw 
 ingestion through to automated alerting.
 
 ---
@@ -14,7 +14,7 @@ Retail businesses lose billions annually to inventory distortion.
 Most mid-size retailers manage stock levels reactively using Excel 
 with no forward visibility. This platform surfaces demand risk 
 automatically every morning so supply chain teams can act before 
-a stockout happens — not after.
+a stockout happens not after.
 
 
 ## Architecture
@@ -28,11 +28,11 @@ OneLake Files/ (Raw CSVs)
 Bronze Delta Tables
 (bronze_sales, bronze_stores, bronze_oil, bronze_holidays)
         │
-        ▼  PySpark Notebook — Cleaning & Typing
+        ▼  PySpark Notebook: Cleaning & Typing
 Silver Delta Tables
 (silver_sales, silver_stores, silver_oil, silver_holidays)
         │
-        ▼  SQL Analytics Endpoint — Views
+        ▼  SQL Analytics Endpoint - Views
 Gold Layer
 (gold_daily_sales, gold_inventory_risk, gold_promotion_impact,
  gold_forecast)
