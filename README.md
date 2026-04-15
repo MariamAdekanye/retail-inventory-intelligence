@@ -136,6 +136,21 @@ who needs the headline picture in under 30 seconds.
 conditional formatting on risk levels, forecast vs actual chart 
 with confidence band, and a reorder alerts table with sparklines.
 
+### Executive Summary Report
+![Executive Summary](screenshots/Executive_report.png.png)
+
+### Operations Overview
+![Overview Page](screenshots/Overview.png.png)
+
+### Store Drilldown
+![Store Drilldown](screenshots/Store_Drilldown.png.png)
+
+### Forecast vs Actual
+![Forecast vs Actual](screenshots/Forecast_Vs_Actual.png.png)
+
+### Reorder Alerts
+![Reorder Alerts](screenshots/Reorder_Alert.png.png)
+
 
 ### 6. Automated Reorder Alert System
 Built a scheduled Power Automate flow that queries the 
