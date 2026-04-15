@@ -6,7 +6,7 @@
 -- Dependencies: silver_sales, silver_stores,
 --               silver_holidays, silver_oil
 -- Last updated: 2026-03-13
--- ============================================
+-- =============================================
 
 IF OBJECT_ID('gold_daily_sales', 'V') IS NOT NULL
     DROP VIEW gold_daily_sales;
