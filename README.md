@@ -146,7 +146,7 @@ with confidence band, and a reorder alerts table with sparklines.
 ![Store Drilldown](screenshots/Store_Drilldown.png.png)
 
 ### Forecast vs Actual
-![Forecast vs Actual](screenshots/Forecast_Vs_Actual.png.png)
+![Forecast vs Actual](screenshots/Forecast_Vs_Actual.png)
 
 ### Reorder Alerts
 ![Reorder Alerts](screenshots/Reorder_Alert.png.png)
