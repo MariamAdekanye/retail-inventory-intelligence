@@ -165,3 +165,7 @@ the database.
 ![alt text](image.png)
 
 ![Email Alert](screenshots/automate_email_alert.png)
+
+## Video Walkthrough
+
+[Watch the 3-minute project walkthrough on Loom](https://www.loom.com/share/63af3c2226234890868c046d8c20b5aa)
