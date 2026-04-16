@@ -66,7 +66,7 @@ Executive Report + Operations Report
 
 ### 1. Medallion Architecture (Bronze → Silver → Gold)
 Raw Kaggle CSV files land in the Bronze layer as Delta tables 
-via PySpark notebooks. The Silver layer applies data cleaning — 
+via PySpark notebooks. The Silver layer applies data cleaning
 fixing date types, clipping negative sales to zero, forward-filling 
 oil prices across weekends, and handling transferred holidays 
 correctly. The Gold layer exposes analytics-ready SQL views that 
@@ -75,7 +75,7 @@ Power BI reads directly.
 **Why this matters:** Each layer serves a different consumer. 
 Bronze is for reprocessing. Silver is for data science. Gold is 
 for BI tools. If upstream logic changes, only the affected layer 
-needs to be rebuilt — nothing downstream breaks automatically.
+needs to be rebuilt nothing downstream breaks automatically.
 
 ---
 
@@ -96,8 +96,7 @@ design decisions.
 ---
 
 ### 3. Power BI Semantic Model With 10 DAX Measures
-Connected to the Gold layer via Direct Lake mode — no data 
-copying, no scheduled refresh lag. Built a star schema with a 
+Connected to the Gold layer via Direct Lake mode. Built a star schema with a 
 Date dimension table and 10 DAX measures covering:
 
 - Time intelligence (Sales LY, YoY Growth %, Rolling 7D Sales)
@@ -124,12 +123,12 @@ model fitting.
 ---
 
 ### 5. Two Power BI Reports for Different Audiences
-Built two separate reports from the same semantic model — 
+Built two separate reports from the same semantic model 
 demonstrating that the same data can serve different stakeholders 
 with different information needs:
 
-**Executive Report** — single page, 5 visuals maximum, KPI cards, 
-trend with forecast overlay, risk map. Designed for a VP or CFO 
+**Executive Report** — single page containing KPI cards, 
+trend with forecast overlay, risk map. Designed for someone 
 who needs the headline picture in under 30 seconds.
 
 **Operations Report** — 4 pages with drillthrough navigation, 
